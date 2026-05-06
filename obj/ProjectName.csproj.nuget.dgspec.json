@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\xampp\\htdocs\\RoomReservation\\ProjectName.csproj": {}
+    "C:\\Users\\HUMPS\\Documents\\FinalASP\\ProjectName.csproj": {}
   },
   "projects": {
-    "C:\\xampp\\htdocs\\RoomReservation\\ProjectName.csproj": {
+    "C:\\Users\\HUMPS\\Documents\\FinalASP\\ProjectName.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\xampp\\htdocs\\RoomReservation\\ProjectName.csproj",
+        "projectUniqueName": "C:\\Users\\HUMPS\\Documents\\FinalASP\\ProjectName.csproj",
         "projectName": "ProjectName",
-        "projectPath": "C:\\xampp\\htdocs\\RoomReservation\\ProjectName.csproj",
-        "packagesPath": "C:\\Users\\molypoly\\.nuget\\packages\\",
-        "outputPath": "C:\\xampp\\htdocs\\RoomReservation\\obj\\",
+        "projectPath": "C:\\Users\\HUMPS\\Documents\\FinalASP\\ProjectName.csproj",
+        "packagesPath": "C:\\Users\\HUMPS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HUMPS\\Documents\\FinalASP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\molypoly\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\HUMPS\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -62,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
