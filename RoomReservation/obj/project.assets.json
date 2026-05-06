@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\xampp\\htdocs\\aspfinal\\ProjectName\\ProjectName.csproj",
+      "projectUniqueName": "C:\\xampp\\htdocs\\aspfinal\\RoomReservation\\ProjectName.csproj",
       "projectName": "ProjectName",
-      "projectPath": "C:\\xampp\\htdocs\\aspfinal\\ProjectName\\ProjectName.csproj",
+      "projectPath": "C:\\xampp\\htdocs\\aspfinal\\RoomReservation\\ProjectName.csproj",
       "packagesPath": "C:\\Users\\molypoly\\.nuget\\packages\\",
-      "outputPath": "C:\\xampp\\htdocs\\aspfinal\\ProjectName\\obj\\",
+      "outputPath": "C:\\xampp\\htdocs\\aspfinal\\RoomReservation\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\molypoly\\AppData\\Roaming\\NuGet\\NuGet.Config"
