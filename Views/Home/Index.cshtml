@@ -1,0 +1,86 @@
+@model IEnumerable<RoomReservation.Models.Reservation>
+@{ ViewData["Title"] = "Dashboard"; }
+
+<h3 class="mb-4">Dashboard</h3>
+
+<div class="row g-3 mb-4">
+    <div class="col-6 col-md-3">
+        <div class="card text-center border-primary">
+            <div class="card-body">
+                <h2 class="text-primary">@ViewBag.TotalRooms</h2>
+                <p class="mb-0">Total Rooms</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card text-center border-success">
+            <div class="card-body">
+                <h2 class="text-success">@ViewBag.AvailableRooms</h2>
+                <p class="mb-0">Available</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card text-center border-warning">
+            <div class="card-body">
+                <h2 class="text-warning">@ViewBag.PendingCount</h2>
+                <p class="mb-0">Pending</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card text-center border-info">
+            <div class="card-body">
+                <h2 class="text-info">@ViewBag.TotalReservations</h2>
+                <p class="mb-0">Reservations</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h5>Recent Reservations</h5>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover bg-white">
+        <thead class="table-primary">
+            <tr>
+                <th>Guest</th>
+                <th>Room</th>
+                <th>Check-In</th>
+                <th>Check-Out</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>@r.GuestName</td>
+                    <td>@r.Room?.RoomName</td>
+                    <td>@r.CheckIn.ToString("MMM dd, yyyy")</td>
+                    <td>@r.CheckOut.ToString("MMM dd, yyyy")</td>
+                    <td>
+                        @{
+                            var badgeClass = r.Status switch {
+                                "Confirmed"   => "bg-success",
+                                "Pending"     => "bg-warning text-dark",
+                                "Checked-In"  => "bg-primary",
+                                "Checked-Out" => "bg-secondary",
+                                "Cancelled"   => "bg-danger",
+                                _             => "bg-light text-dark"
+                            };
+                        }
+                        <span class="badge @badgeClass">@r.Status</span>
+                    </td>
+                    <td>
+                        <a asp-controller="Reservations" asp-action="Details" asp-route-id="@r.ReservationId" class="btn btn-sm btn-outline-primary">View</a>
+                    </td>
+                </tr>
+            }
+            @if (!Model.Any())
+            {
+                <tr><td colspan="6" class="text-center text-muted">No reservations yet.</td></tr>
+            }
+        </tbody>
+    </table>
+</div>

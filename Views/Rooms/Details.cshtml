@@ -1,0 +1,45 @@
+@model RoomReservation.Models.Room
+@{ ViewData["Title"] = Model.RoomName; }
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Rooms" asp-action="Index">Rooms</a></li>
+        <li class="breadcrumb-item active">@Model.RoomName</li>
+    </ol>
+</nav>
+
+<h3 class="mb-3">@Model.RoomName</h3>
+
+<div class="card mb-3" style="max-width: 500px;">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">Type</dt>
+            <dd class="col-sm-8">@Model.RoomType</dd>
+
+            <dt class="col-sm-4">Capacity</dt>
+            <dd class="col-sm-8">@Model.Capacity guests</dd>
+
+            <dt class="col-sm-4">Price / Night</dt>
+            <dd class="col-sm-8">₱@Model.PricePerNight.ToString("N2")</dd>
+
+            <dt class="col-sm-4">Available</dt>
+            <dd class="col-sm-8">
+                @if (Model.IsAvailable)
+                {
+                    <span class="badge bg-success">Yes</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">No</span>
+                }
+            </dd>
+
+            <dt class="col-sm-4">Description</dt>
+            <dd class="col-sm-8">@(Model.Description ?? "—")</dd>
+        </dl>
+    </div>
+</div>
+
+<a asp-action="Edit"   asp-route-id="@Model.RoomId" class="btn btn-warning">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.RoomId" class="btn btn-danger">Delete</a>
+<a asp-action="Index"                                class="btn btn-secondary">Back</a>
