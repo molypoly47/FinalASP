@@ -1,0 +1,88 @@
+@model RoomReservation.Models.Reservation
+@{
+    ViewData["Title"] = "New Booking";
+    var rooms    = (List<RoomReservation.Models.Room>)ViewBag.Rooms;
+    var statuses = (string[])ViewBag.Statuses;
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Reservations" asp-action="Index">Reservations</a></li>
+        <li class="breadcrumb-item active">New Booking</li>
+    </ol>
+</nav>
+
+<h3 class="mb-3">New Booking</h3>
+
+<div class="card" style="max-width: 650px;">
+    <div class="card-body">
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label asp-for="GuestName" class="form-label"></label>
+                <input asp-for="GuestName" class="form-control" />
+                <span asp-validation-for="GuestName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="GuestEmail" class="form-label"></label>
+                <input asp-for="GuestEmail" type="email" class="form-control" />
+                <span asp-validation-for="GuestEmail" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="GuestPhone" class="form-label"></label>
+                <input asp-for="GuestPhone" class="form-control" />
+                <span asp-validation-for="GuestPhone" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="RoomId" class="form-label"></label>
+                <select asp-for="RoomId" class="form-select">
+                    <option value="">-- Select Room --</option>
+                    @foreach (var room in rooms)
+                    {
+                        <option value="@room.RoomId">@room.RoomName (@room.RoomType) — ₱@room.PricePerNight.ToString("N2")/night</option>
+                    }
+                </select>
+                <span asp-validation-for="RoomId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CheckIn" class="form-label"></label>
+                <input asp-for="CheckIn" type="date" class="form-control" />
+                <span asp-validation-for="CheckIn" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CheckOut" class="form-label"></label>
+                <input asp-for="CheckOut" type="date" class="form-control" />
+                <span asp-validation-for="CheckOut" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Status" class="form-label"></label>
+                <select asp-for="Status" class="form-select">
+                    @foreach (var s in statuses)
+                    {
+                        <option value="@s">@s</option>
+                    }
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="SpecialRequests" class="form-label"></label>
+                <textarea asp-for="SpecialRequests" class="form-control" rows="2"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Booking</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

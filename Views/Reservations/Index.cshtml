@@ -1,0 +1,84 @@
+@model IEnumerable<RoomReservation.Models.Reservation>
+@{
+    ViewData["Title"] = "Reservations";
+    string[] statuses = ViewBag.Statuses;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Reservations</h3>
+    <a asp-action="Create" class="btn btn-primary">+ New Booking</a>
+</div>
+
+<form asp-action="Index" method="get" class="row g-2 mb-3">
+    <div class="col-md-4">
+        <input type="text" name="search" value="@ViewBag.CurrentSearch" class="form-control" placeholder="Search by guest name..." />
+    </div>
+    <div class="col-md-3">
+        <select name="status" class="form-select">
+            <option value="">All Statuses</option>
+            @foreach (var s in statuses)
+            {
+                <option value="@s" selected="@(s == (string)ViewBag.CurrentStatus)">@s</option>
+            }
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-outline-primary">Filter</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Clear</a>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover bg-white">
+        <thead class="table-primary">
+            <tr>
+                <th>Guest</th>
+                <th>Room</th>
+                <th>Check-In</th>
+                <th>Check-Out</th>
+                <th>Nights</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>
+                        @r.GuestName<br />
+                        <small class="text-muted">@r.GuestEmail</small>
+                    </td>
+                    <td>@r.Room?.RoomName</td>
+                    <td>@r.CheckIn.ToString("MMM dd, yyyy")</td>
+                    <td>@r.CheckOut.ToString("MMM dd, yyyy")</td>
+                    <td>@r.TotalNights</td>
+                    <td>₱@r.TotalAmount.ToString("N2")</td>
+                    <td>
+                        @{
+                            var cls = r.Status switch {
+                                "Confirmed"   => "bg-success",
+                                "Pending"     => "bg-warning text-dark",
+                                "Checked-In"  => "bg-primary",
+                                "Checked-Out" => "bg-secondary",
+                                "Cancelled"   => "bg-danger",
+                                _             => "bg-light text-dark"
+                            };
+                        }
+                        <span class="badge @cls">@r.Status</span>
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@r.ReservationId" class="btn btn-sm btn-info">Details</a>
+                        <a asp-action="Edit"    asp-route-id="@r.ReservationId" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-action="Delete"  asp-route-id="@r.ReservationId" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+            @if (!Model.Any())
+            {
+                <tr><td colspan="8" class="text-center text-muted">No reservations found.</td></tr>
+            }
+        </tbody>
+    </table>
+</div>
